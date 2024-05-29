@@ -4,28 +4,45 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="/src/styles.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tauri App</title>
     <script type="module" src="/src/main.ts" defer></script>
   </head>
 
   <body>
-    <div class="row">
-      <div class="col">
-        <label for="f1">Folder 1 path</label>
-        <input type="text" placeholder="Folder 1" id="f1" />
-        <label for="f2">Folder 2 path</label>
-        <input type="text" placeholder="Folder 2" id="f2" />
-        <button id="scan-btn">Scan</button>
-      </div>
+    <div id="error-screen-too-narrow">Resize your window to avoid errors.</div>
+    <div id="container">
+      <div class="row">
+        <form class="col" id="scan-paths-form">
+          <h2 class="title">Enter folders to compare</h2>
 
-      <div class="col">
-        <h2>Only in folder 1</h2>
-        <ul id="f1_diff"></ul>
-      </div>
+          <label for="f1"
+            >Folder 1
+            <p class="folder-icon folder1-icon"></p
+          ></label>
+          <input type="text" pattern="\w:\\.*" placeholder="Folder 1" id="f1" />
 
-      <div class="col">
-        <h2>Only in folder 2</h2>
-        <ul id="f2_diff"></ul>
+          <label for="f2"
+            >Folder 2
+            <p class="folder-icon folder2-icon"></p
+          ></label>
+          <input type="text" pattern="\w:\\.*" placeholder="Folder 2" id="f2" />
+
+          <button id="scan-btn">Scan</button>
+        </form>
+        <div class="col" id="differences-container">
+          <h2 class="title">Files</h2>
+          <ul id="differences">
+            <li
+              class="file-difference-item"
+              style="
+                border: 1px solid var(--color-error);
+                background: none;
+                justify-content: center;
+              "
+            >
+              No files found
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </body>
