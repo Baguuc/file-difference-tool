@@ -5,7 +5,6 @@ const f2 = document.getElementById("f2") as HTMLInputElement;
 const differencesListElement = document.getElementById(
   "differences"
 ) as HTMLUListElement;
-
 /*
 ############################
 #                          #
@@ -109,35 +108,49 @@ const scanPathsForm = document.getElementById(
   "scan-paths-form"
 ) as HTMLFormElement;
 
+async function validatePath(inputElement: HTMLInputElement): Promise<boolean> {
+  const isInputEmpty = inputElement.value === "";
+
+  if (isInputEmpty) {
+    inputElement.style.borderColor = "var(--color-error)";
+
+    return false;
+  } else {
+    inputElement.style.borderColor = "var(--color-text)";
+  }
+
+  const valid = await invoke("dir_exists", {
+    directory: inputElement.value,
+  });
+
+  if (!valid) {
+    inputElement.style.borderColor = "var(--color-error)";
+
+    return false;
+  } else {
+    inputElement.style.borderColor = "var(--color-text)";
+  }
+
+  return true;
+}
+
 scanPathsForm.querySelectorAll('input[type="text"]').forEach((input) => {
   input.addEventListener("input", async (event: Event) => {
     event.preventDefault();
     const target = event.target as HTMLInputElement;
-    const isInputEmpty = (event.target as HTMLInputElement).value === "";
 
-    if (isInputEmpty) {
-      target.style.borderColor = "var(--color-error)";
-
-      return;
-    } else {
-      target.style.borderColor = "var(--color-text)";
-    }
-
-    const valid = await invoke("dir_exists", {
-      directory: target.value,
-    });
-
-    if (!valid) {
-      target.style.borderColor = "var(--color-error)";
-
-      return;
-    } else {
-      target.style.borderColor = "var(--color-text)";
-    }
+    await validatePath(target);
   });
 });
 
-scanPathsForm?.addEventListener("submit", (event: SubmitEvent) => {
+scanPathsForm?.addEventListener("submit", async (event: SubmitEvent) => {
   event.preventDefault();
+
+  for (let inputElement of [f1, f2]) {
+    if (!(await validatePath(inputElement))) {
+      return;
+    }
+  }
+
   scan();
 });

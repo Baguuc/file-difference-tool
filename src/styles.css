@@ -8,10 +8,12 @@
   --color-bg-medium: rgb(34, 32, 32);
   --color-text: rgb(246, 246, 246);
   --color-error: rgb(235, 72, 72);
-  --color-secondary: rgb(110, 230, 150);
-  --color-secondary-dark: rgb(27.5, 57.5, 37.5);
-  --color-tetiary: rgb(230, 200, 120);
-  --color-tetiary-dark: rgb(57.5, 50, 30);
+  /**/
+  --color-secondary: rgb(255, 0, 63);
+  --color-secondary-dark: rgb(127.5, 0, 31.5);
+  /**/
+  --color-tetiary: rgb(119, 255, 164);
+  --color-tetiary-dark: rgb(59.5, 127.5, 82);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -162,6 +164,8 @@ body {
 
 .file-difference-item > span {
   width: 100%;
+  word-break: break-word;
+  word-wrap: break-word;
 }
 
 .file-difference-item > .folder-icon {

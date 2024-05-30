@@ -1,7 +1,6 @@
 [package]
-name = "desktop-app"
+name = "file-difference-tool"
 version = "0.0.0"
-description = "A Tauri App"
 authors = ["you"]
 edition = "2021"
 
