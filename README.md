@@ -15,4 +15,4 @@ This app is only avaible for Windows at the moment, to install download installe
 
 ### License
 
-This software is licensed under GNU GENERAL PUBLIC LICENSE, more about this license can be found in [LICENSE file](./License)
+This software is licensed under GNU GENERAL PUBLIC LICENSE, more about this license can be found [there](https://www.gnu.org/licenses/gpl-3.0.en.html)
