@@ -30,9 +30,9 @@ body {
 }
 
 #container {
-  display: grid;
-  place-content: center;
-  height: 99dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .row {
@@ -114,13 +114,15 @@ body {
   gap: 12px;
 }
 
-#differences-container {
+#differences-container-large {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-#differences {
+.differences {
+  display: flex;
+  flex-flow: column nowrap;
   text-align: center;
   list-style-type: none;
   display: flex;
@@ -135,12 +137,21 @@ body {
   padding: 0 30px;
 }
 
-#differences::-webkit-scrollbar {
+.differences > #no-files {
+  all: unset;
+  padding: 8px 0;
+  border-radius: 10px;
+  border: 1px solid var(--color-error);
+  background: none;
+  justify-content: center;
+}
+
+.differences::-webkit-scrollbar {
   border: 1px solid var(--color-text);
   border-radius: 4px;
 }
 
-#differences::-webkit-scrollbar-thumb {
+.differences::-webkit-scrollbar-thumb {
   background-color: var(--color-text);
   border-radius: 4px;
 }
@@ -188,6 +199,7 @@ button {
   transition: border-color 0.25s;
   border: 1px solid var(--color-text);
   box-shadow: 0 1px 1px var(--color-text);
+  outline: none;
 }
 
 input:focus,
@@ -210,9 +222,53 @@ button:active {
   background-color: #e8e8e8;
 }
 
-input,
-button {
-  outline: none;
+.finput-col {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  justify-content: start;
+  align-items: start;
+  height: fit-content;
+}
+
+.finput-row {
+  width: fit-content;
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+}
+
+.finput-button {
+  padding: 10px 0;
+  width: 100%;
+  border-radius: 8px;
+  font-weight: 500;
+  font-family: inherit;
+  color: var(--color-text);
+  transition: border-color 0.25s;
+  border: 1px solid var(--color-text);
+  box-shadow: 0 1px 1px var(--color-text);
+}
+
+.finput-button {
+  cursor: pointer;
+}
+
+.finput-button:hover {
+  border-color: var(--color-secondary);
+  box-shadow: none;
+}
+
+.finput-button :active {
+  border-color: var(--color-secondary);
+  background-color: #e8e8e8;
+}
+
+.finput-native-w {
+  display: none;
+  visibility: hidden;
 }
 
 .input-error {
@@ -220,25 +276,50 @@ button {
   font-weight: bold;
 }
 
-@media screen and (max-width: 750px) {
-  #container {
-    display: none;
-  }
-  #error-screen-too-narrow {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    height: 100dvh;
-    width: 100dvw;
-    color: var(--color-error);
-    font-weight: bold;
-  }
+#differences-container-small {
+  display: none;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  position: absolute;
+  background-color: var(--color-bg-dark);
+  top: 0;
+  left: 0;
+  width: 100dvw;
+  height: 100dvh;
+  z-index: 100;
+  gap: 8px;
 }
 
-@media screen and (min-width: 750px) {
-  #error-screen-too-narrow {
+#differences-container-small-button {
+  display: none;
+}
+
+#differences-container-small-close-btn {
+  width: calc(100% - 40px);
+  text-align: center;
+}
+
+#differences-container-small > .differences > li {
+  width: calc(100% - 30px);
+}
+
+@media screen and (max-width: 590px) {
+  body {
+    overflow: scroll;
+  }
+  #container {
+    height: 100dvh;
+  }
+  #container > .row {
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+  }
+  #differences-container-large {
     display: none;
+  }
+  #differences-container-small-button {
+    display: block;
   }
 }

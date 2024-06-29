@@ -2,9 +2,17 @@ import { invoke } from "@tauri-apps/api/tauri";
 
 const f1 = document.getElementById("f1") as HTMLInputElement;
 const f2 = document.getElementById("f2") as HTMLInputElement;
-const differencesListElement = document.getElementById(
-  "differences"
-) as HTMLUListElement;
+const [differencesListElement, differencesPreviewList] =
+  document.querySelectorAll(".differences");
+const differencesContainerSmall = document.getElementById(
+  "differences-container-small"
+);
+const differencesContainerSmallButton = document.getElementById(
+  "differences-container-small-button"
+);
+const differencesContainerSmallCloseButton = document.getElementById(
+  "differences-container-small-close-btn"
+);
 /*
 ############################
 #                          #
@@ -19,20 +27,27 @@ interface FileListItem {
 }
 
 async function scan() {
-  // make sure to remove previous results list
-  differencesListElement.innerHTML = "";
-
   // make sure both fields are filled
-  if (!f1.value || !f2.value) {
+  if (!f1.files || !f2.files) {
     return;
   }
 
-  const folders = [f1.value, f2.value];
+  const f1Value = [...f1.files].map((file) => file.name);
+  const f2Value = [...f2.files].map((file) => file.name);
+  const filesToScan = [f1Value, f2Value];
 
   // scan the folders for differences
   const differences: FileListItem[] = await invoke("get_differences", {
-    directories: folders,
+    files: filesToScan,
   });
+
+  await showScannedDifferences(differences);
+}
+
+async function showScannedDifferences(differences: FileListItem[]) {
+  // make sure to remove previous results list
+  differencesListElement.innerHTML = "";
+  differencesPreviewList.innerHTML = "";
 
   differences.sort((prev, current) => {
     // just so you dont have to read:
@@ -68,10 +83,16 @@ async function scan() {
     return;
   }
 
-  console.log(differences);
+  appendDifferenceItemsToList(differences, differencesListElement);
+  appendDifferenceItemsToList(differences, differencesPreviewList);
 
-  // display the results in the list
-  differences.forEach((item) => {
+  if (window.innerWidth < 550) {
+    openDifferenceContainerSmall();
+  }
+}
+
+function appendDifferenceItemsToList(items: FileListItem[], list: Element) {
+  items.forEach((item) => {
     const listitem = document.createElement("li");
     listitem.className = "file-difference-item";
 
@@ -92,7 +113,7 @@ async function scan() {
 
     listitem.appendChild(exclusiveToElement);
 
-    differencesListElement?.appendChild(listitem);
+    list?.appendChild(listitem);
   });
 }
 
@@ -109,9 +130,19 @@ const scanPathsForm = document.getElementById(
 ) as HTMLFormElement;
 
 async function validatePath(inputElement: HTMLInputElement): Promise<boolean> {
-  const isInputEmpty = inputElement.value === "";
+  if (!inputElement) {
+    return false;
+  }
 
-  if (isInputEmpty) {
+  if (!inputElement.files) {
+    inputElement.style.borderColor = "var(--color-error)";
+
+    return false;
+  }
+
+  const value = inputElement.value;
+
+  if (value.length <= 0) {
     inputElement.style.borderColor = "var(--color-error)";
 
     return false;
@@ -120,7 +151,7 @@ async function validatePath(inputElement: HTMLInputElement): Promise<boolean> {
   }
 
   const valid = await invoke("dir_exists", {
-    directory: inputElement.value,
+    directory: value,
   });
 
   if (!valid) {
@@ -134,7 +165,7 @@ async function validatePath(inputElement: HTMLInputElement): Promise<boolean> {
   return true;
 }
 
-scanPathsForm.querySelectorAll('input[type="text"]').forEach((input) => {
+scanPathsForm.querySelectorAll(".finput-native-w").forEach((input) => {
   input.addEventListener("input", async (event: Event) => {
     event.preventDefault();
     const target = event.target as HTMLInputElement;
@@ -146,11 +177,45 @@ scanPathsForm.querySelectorAll('input[type="text"]').forEach((input) => {
 scanPathsForm?.addEventListener("submit", async (event: SubmitEvent) => {
   event.preventDefault();
 
-  for (let inputElement of [f1, f2]) {
-    if (!(await validatePath(inputElement))) {
-      return;
-    }
-  }
+  await scan();
 
-  scan();
+  [f1, f2].forEach((el) => {
+    const target = el as HTMLElement;
+    const id = target.id;
+    const targetCorrespondingButton = document.querySelector(
+      `label[for="${id}"] .finput-button`
+    ) as HTMLElement;
+
+    targetCorrespondingButton.textContent = "Choose";
+    targetCorrespondingButton.style.borderColor = "var(--color-text)";
+  });
 });
+
+function openDifferenceContainerSmall() {
+  differencesContainerSmall!.style.display = "flex";
+}
+
+function cloeDifferenceContainerSmall() {
+  differencesContainerSmall!.style.display = "none";
+}
+
+differencesContainerSmallButton?.addEventListener("click", async () => {
+  openDifferenceContainerSmall();
+});
+
+differencesContainerSmallCloseButton?.addEventListener("click", async () => {
+  cloeDifferenceContainerSmall();
+});
+
+[f1, f2].forEach((el) =>
+  el.addEventListener("input", async (event) => {
+    const target = event.target as HTMLElement;
+    const id = target.id;
+    const targetCorrespondingButton = document.querySelector(
+      `label[for="${id}"] .finput-button`
+    ) as HTMLElement;
+
+    targetCorrespondingButton.textContent = "Choosen";
+    targetCorrespondingButton.style.borderColor = "var(--color-tetiary)";
+  })
+);

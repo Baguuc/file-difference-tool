@@ -8,29 +8,50 @@
   </head>
 
   <body>
-    <div id="error-screen-too-narrow">Resize your window to avoid errors.</div>
     <div id="container">
       <div class="row">
         <form class="col" id="scan-paths-form">
           <h2 class="title">Enter folders to compare</h2>
 
-          <label for="f1"
-            >Folder 1
-            <p class="folder-icon folder1-icon"></p
-          ></label>
-          <input type="text" pattern="\w:\\.*" placeholder="Folder 1" id="f1" />
+          <label for="f1">
+            <div class="finput-col">
+              <div class="finput-row">
+                <p>Folder 1</p>
+                <p class="folder-icon folder1-icon"></p>
+              </div>
+              <p class="finput-button">Choose</p>
+            </div>
+          </label>
+          <input
+            type="file"
+            webkitdirectory
+            id="f1"
+            multiple
+            class="finput-native-w"
+          />
 
-          <label for="f2"
-            >Folder 2
-            <p class="folder-icon folder2-icon"></p
-          ></label>
-          <input type="text" pattern="\w:\\.*" placeholder="Folder 2" id="f2" />
+          <label for="f2">
+            <div class="finput-col">
+              <div class="finput-row">
+                <p>Folder 2</p>
+                <p class="folder-icon folder2-icon"></p>
+              </div>
+              <p class="finput-button">Choose</p>
+            </div>
+          </label>
+          <input
+            type="file"
+            webkitdirectory
+            id="f2"
+            multiple
+            class="finput-native-w"
+          />
 
           <button id="scan-btn">Scan</button>
         </form>
-        <div class="col" id="differences-container">
+        <div class="col" id="differences-container-large">
           <h2 class="title">Files</h2>
-          <ul id="differences">
+          <ul class="differences">
             <li
               class="file-difference-item"
               style="
@@ -38,12 +59,20 @@
                 background: none;
                 justify-content: center;
               "
+              id="no-files"
             >
               No files found
             </li>
           </ul>
         </div>
+        <button id="differences-container-small-button">
+          Show differences
+        </button>
       </div>
+    </div>
+    <div id="differences-container-small">
+      <button id="differences-container-small-close-btn">Close</button>
+      <ul class="differences"></ul>
     </div>
   </body>
 </html>
