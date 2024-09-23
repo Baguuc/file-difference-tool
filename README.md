@@ -2,6 +2,9 @@
 
 ### Tool for scanning directory for exclusive files in each
 
+### Idea
+In case someone is wondering: my dad needed a application to compare file names from different folders at his job so I made him this.
+
 ![Showcase](./showcase.gif)
 
 ## Installation
