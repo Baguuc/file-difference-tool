@@ -22,12 +22,13 @@ body {
 
 .folder-tag {
   width: fit-content;
-  min-width: 160px;
   height: fit-content;
-  padding-left: 12px;
-  padding-right: 12px;
-  padding-top: 6px;
-  padding-bottom: 6px;
+  --padding-x: 12px;
+  --padding-y: 6px;
+  padding-left: var(--padding-x);
+  padding-right: var(--padding-x);
+  padding-top: var(--padding-y);
+  padding-bottom: var(--padding-y);
   border-radius: 8px;
   text-align: center;
 }
@@ -42,4 +43,52 @@ body {
   background-color: var(--bg-accent-2);
   color: var(--fg-accent-2);
   border: solid 1px var(--fg-accent-2);
+}
+
+.file-list-item {
+  width: fit-content;
+  min-width: 200px;
+  height: fit-content;
+  min-height: 100px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: start;
+  --padding-x: 18px;
+  --padding-y: 6px;
+  padding-left: var(--padding-x);
+  padding-right: var(--padding-x);
+  padding-top: var(--padding-y);
+  padding-bottom: var(--padding-y);
+  border-radius: 16px;
+  background-color: var(--bg-normal) !important;
+}
+
+.file-list-item-dark {
+  background-color: var(--bg-dark) !important;
+}
+
+.file-list-item-outline {
+  border: solid 1px var(--fg-dark) !important;
+}
+
+.file-list-item > .file-list-item-title {
+  font-size: 16px;
+  text-decoration: underline;
+  color: var(--fg-dark);
+}
+
+.file-list-item > .file-list-item-tags {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 10px;
+  --padding-x: 2px;
+  --padding-y: 2px;
+  padding-left: var(--padding-x);
+  padding-right: var(--padding-x);
+  padding-top: var(--padding-y);
+  padding-bottom: var(--padding-y);
+}
+
+.file-list-item > .file-list-item-tags > .folder-tag {
+  width: 100%;
 }
