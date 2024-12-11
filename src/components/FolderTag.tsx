@@ -1,3 +1,5 @@
+import { getCurrLang } from "../consts/lang";
+
 type FolderTagVariant = "1" | "2";
 
 type FolderTagProps = {
@@ -5,7 +7,7 @@ type FolderTagProps = {
 };
 
 function FolderTag(props: FolderTagProps) {
-    return <p className={`folder-tag folder-tag-${props.variant}`}>{props.variant === "1" ? "Folder 1" : "Folder 2"}</p>
+    return <p className={`folder-tag folder-tag-${props.variant}`}>{props.variant === "1" ? getCurrLang().folder1Label : getCurrLang().folder2Label}</p>
 }
 
 export default FolderTag;

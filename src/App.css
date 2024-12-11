@@ -227,3 +227,16 @@ body {
   color: var(--fg-dark);
   text-align: center;
 }
+
+.lang-chooser {
+  background-color: var(--bg-dark);
+  border: solid 1px var(--fg-dark);
+  color: var(--fg-dark);
+  --padding-x: 4px;
+  --padding-y: var(--padding-x);
+  padding-left: var(--padding-x);
+  padding-right: var(--padding-x);
+  padding-top: var(--padding-y);
+  padding-bottom: var(--padding-y);
+  border-radius: 4px;
+}

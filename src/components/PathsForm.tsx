@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { getCurrLang } from "../consts/lang";
 
 type _File = {
     name: string;
@@ -15,7 +16,7 @@ type PathInputProps = {
 function PathInput(props: PathInputProps) {
     const [files, setFiles] = useState(null as PathFiles | null);
     const [chosen, setChosen] = useState(!!files);
-    const [label, setLabel] = useState("Choose a folder");
+    const [label, setLabel] = useState(getCurrLang().pathInputBeforeChosenLabel);
 
     useEffect(() => {
         const el = document.getElementById(props.id);
@@ -26,7 +27,7 @@ function PathInput(props: PathInputProps) {
 
     useEffect(() => {
         if(chosen) {
-            setLabel(`Chosen (${files?.length})`);
+            setLabel(`${getCurrLang().pathInputAfterChosenLabel} (${files?.length})`);
         }
     }, [chosen]);
 
@@ -74,7 +75,7 @@ function PathsForm(props: PathsFormProps) {
     }, [path1, path2]);
 
     return <div className="paths-form">
-        <h1 className="paths-form-title">Choose the files</h1>
+        <h1 className="paths-form-title">{getCurrLang().pathsFormTitle}</h1>
         <PathInput
             id={"p1"}
             onInput={setPath1}

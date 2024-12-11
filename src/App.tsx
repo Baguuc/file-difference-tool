@@ -3,6 +3,7 @@ import "./App.css";
 import FileList, { FileListData } from "./components/FileList";
 import { invoke } from "@tauri-apps/api/core";
 import PathsForm, { PathFiles } from "./components/PathsForm";
+import LangChooser from "./components/LangChooser";
 
 function App() {
   const [data, setData] = useState([] as FileListData);
@@ -20,6 +21,7 @@ function App() {
   }, [path1Files, path2Files]);
 
   return <div className="document-root">
+    <LangChooser />
     <PathsForm onInput={({ path1, path2 }) => {
       setPath1File(path1);
       setPath2File(path2);
