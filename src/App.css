@@ -45,6 +45,20 @@ body {
   border: solid 1px var(--fg-accent-2);
 }
 
+.file-list {
+  width: fit-content;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 8px;
+  overflow-x: hidden;
+  overflow-y: visible;
+  max-height: 95dvh;
+}
+
+.file-list > .file-list-item {
+  width: 225px;
+}
+
 .file-list-item {
   width: fit-content;
   min-width: 200px;

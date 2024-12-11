@@ -1,11 +1,11 @@
 import FolderTag from "./FolderTag";
 
 const tagsMap = {
-    1: <FolderTag variant={1} />,
-    2: <FolderTag variant={2} />,
+    "1": <FolderTag variant={"1"} />,
+    "2": <FolderTag variant={"2"} />,
     "both": [
-        <FolderTag variant={1} />,
-        <FolderTag variant={2} />
+        <FolderTag variant={"1"} />,
+        <FolderTag variant={"2"} />
     ]
 } as const;
 
