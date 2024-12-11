@@ -59,7 +59,7 @@ body {
   padding-right: var(--padding-x);
   padding-top: var(--padding-y);
   padding-bottom: var(--padding-y);
-  border-radius: 16px;
+  border-radius: 8px;
   background-color: var(--bg-normal) !important;
 }
 
@@ -91,4 +91,36 @@ body {
 
 .file-list-item > .file-list-item-tags > .folder-tag {
   width: 100%;
+}
+
+.file-list-group {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 10px;
+  --padding-x: 12px;
+  --padding-y: var(--padding-x);
+  padding-left: var(--padding-x);
+  padding-right: var(--padding-x);
+  padding-top: var(--padding-y);
+  padding-bottom: var(--padding-y);
+  background-color: var(--bg-dark);
+  border-radius: 16px;
+}
+
+.file-list-group-outline {
+  border: solid 1px var(--fg-dark) !important;
+}
+
+.file-list-group-title {
+  font-size: 16px;
+  text-decoration: underline;
+  color: var(--fg-dark);
+}
+
+.file-list-group > .file-list-group-items {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 10px;
 }

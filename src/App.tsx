@@ -1,10 +1,13 @@
 import "./App.css";
+import FileListGroup from "./components/FileListGroup";
 import FileListItem from "./components/FileListItem";
-import FolderTag from "./components/FolderTag";
 
 function App() {
   return <div>
-    <FileListItem tag={"both"} filename="Filename" dark={false} outline={false} />
+    <FileListGroup title="Same content">
+      <FileListItem filename="Filename 1" tag={1} dark={false} />
+      <FileListItem filename="Filename 2" tag={2} dark={false} />
+    </FileListGroup>
   </div>
 }
 
