@@ -1,31 +1,35 @@
-import FileListGroup from "./FileListGroup";
 import FileListItem from "./FileListItem";
 
 type FileListItemData = {
     filename: string;
     folder: "1" | "2" | "both";
 };
-type FileListGroupData = FileListItemData[];
-type FileListData = FileListGroupData[];
+type FileListData = FileListItemData[];
 
 type FileListProps = {
     data: FileListData
 };
 
-function renderGroup(data: FileListGroupData): React.ReactNode | React.ReactNode[] {
-    if(data.length === 1) {
-        const item = data[0];
+function renderItem(item: FileListItemData, idx: number): React.ReactNode | React.ReactNode[] {
+    const keyFirstPart = item.folder === '1'
+        ? 'p1:' 
+        : item.folder === '2' 
+            ? 'p2:' 
+            : 'bo:';
+    const keySecondPart = idx;
+    const key = `${keyFirstPart}${keySecondPart}`;
 
-        return <FileListItem filename={item.filename} tag={item.folder} dark={true} outline={true} />
-    }
-    
-    return <FileListGroup title="Same content" outline={true}>
-        {data.map(item => <FileListItem filename={item.filename} tag={item.folder} />)}
-    </FileListGroup>
+    return <FileListItem 
+        key={key}
+        filename={item.filename} 
+        tag={item.folder} 
+        dark={true} 
+        outline={true} 
+    />
 }
 
 function FileList(props: FileListProps): React.ReactNode {
-    const mapped = props.data.map(renderGroup);
+    const mapped = props.data.map(renderItem);
 
     return <div className="file-list">{mapped}</div>
 }
