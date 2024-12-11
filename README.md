@@ -1,7 +1,19 @@
-# Tauri + React + Typescript
+# File Difference Tool
 
-This template should help get you started developing with Tauri, React and Typescript in Vite.
+## Tool for scanning directory for exclusive files in each
 
-## Recommended IDE Setup
+### Idea
+In case someone is wondering: my dad needed a application to compare file names from different folders at his job so I made him this.
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+### Installation
+
+This app is only avaible for Windows at the moment, to install download installer from "releases" section and or download the portable version.
+
+### Usage
+
+- Type the paths you want to examine into the inputs on the left side
+- The results of scan will be displayed on the right, the icons shows if different files on appear only in Folder 1, Folder 2 or if they exists in Both.
+
+### License
+
+This software is licensed under GNU GENERAL PUBLIC LICENSE, more about this license can be found [there](https://www.gnu.org/licenses/gpl-3.0.en.html)
