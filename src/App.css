@@ -33,6 +33,58 @@ body {
   justify-content: center;
 }
 
+.btn {
+  all: unset;
+  transition: .25s;
+  font-size: 12px;
+  text-align: center;
+  width: fit-content;
+  --padding-x: 16px;
+  --padding-y: 8px;
+  padding-left: var(--padding-x);
+  padding-right: var(--padding-x);
+  padding-top: var(--padding-y);
+  padding-bottom: var(--padding-y);
+  background-color: var(--bg-dark);
+  color: var(--fg-dark);
+  border: solid 1px var(--fg-dark);
+  border-radius: 4px;
+}
+
+.btn:hover {
+  opacity: .5;
+}
+
+.btn-full-w {
+  width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.text-input {
+  all: unset;
+  transition: .25s;
+  font-size: 12px;
+  text-align: center;
+  width: fit-content;
+  --padding-x: 16px;
+  --padding-y: 8px;
+  padding-left: var(--padding-x);
+  padding-right: var(--padding-x);
+  padding-top: var(--padding-y);
+  padding-bottom: var(--padding-y);
+  background-color: var(--bg-dark);
+  color: var(--fg-dark);
+  border: solid 1px var(--fg-dark);
+  border-radius: 4px;
+}
+
+.text-input-full-w {
+  width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
 .folder-tag {
   width: fit-content;
   height: fit-content;
@@ -154,17 +206,15 @@ body {
 }
 
 .path-input {
-  background-color: #FFF;
-  --width: 125px;
-  width: var(--width);
+  width: fit-content;
   --height: 50px;
-  height: var(--height);
+  display: grid;
+  grid-template-areas: "stack";
+  place-content: center;
+  background-color: #FFF;
   border-radius: 8px;
   background-color: var(--bg-normal);
   color: var(--fg-dark);
-  --padding-x: 16px;
-  padding-left: var(--padding-x);
-  padding-right: var(--padding-x);
   font-size: 12px;
   transition: .25s;
 }
@@ -174,23 +224,26 @@ body {
 }
 
 .path-input > .path-input-label {
-  width: var(--width);
-  height: var(--height);
-  translate: 0 calc(var(--height) / 3);
+  height: var(--height) !important;
+  grid-area: stack;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 0;
   margin: 0;
-  z-index: -1;
+  z-index: 1;
+  height: 100%;
 }
 
 .path-input > .path-input-input {
-  width: var(--width);
-  height: var(--height);
+  height: var(--height) !important;
+  grid-area: stack;
   padding: 0;
   margin: 0;
-  opacity: 0%;
-  translate: 0 calc(-1 * var(--height));
-  z-index: 1;
+  opacity: 0;
+  z-index: 2;
+  height: 100%;
 }
 
 .path-input-dark {
@@ -199,6 +252,10 @@ body {
 
 .path-input-outline {
   border: solid 1px var(--fg-dark) !important;
+}
+
+.path-input-full-w {
+  width: 100% !important;
 }
 
 .path-input-chosen {
@@ -220,6 +277,15 @@ body {
   padding-top: var(--padding-y);
   padding-bottom: var(--padding-y);
   border-radius: 16px;
+}
+
+.paths-form > .paths-form-section {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 16px;
+  background-color: var(--bg-normal);
 }
 
 .paths-form > .paths-form-title {

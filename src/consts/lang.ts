@@ -2,24 +2,30 @@ type Lang = {
     pathsFormTitle: string;
     pathInputBeforeChosenLabel: string;
     pathInputAfterChosenLabel: string;
-    folder1Label: string;
-    folder2Label: string;
+    folder1DefaultLabel: string;
+    folder2DefaultLabel: string;
+    folderLabelInputPlaceholder: string;
+    scanButtonLabel: string;
 };
 
 const en: Lang = {
     pathsFormTitle: "Choose the folders",
     pathInputBeforeChosenLabel: "Choose a folder",
     pathInputAfterChosenLabel: "Chosen",
-    folder1Label: "Folder 1",
-    folder2Label: "Folder 2"
+    folder1DefaultLabel: "Folder 1",
+    folder2DefaultLabel: "Folder 2",
+    folderLabelInputPlaceholder: "Set a label",
+    scanButtonLabel: "Scan"
 } as const;
 
 const pl: Lang = {
     pathsFormTitle: "Wybierz foldery",
     pathInputBeforeChosenLabel: "Wybierz folder",
     pathInputAfterChosenLabel: "Wybrano",
-    folder1Label: "Folder 1",
-    folder2Label: "Folder 2"
+    folder1DefaultLabel: "Folder 1",
+    folder2DefaultLabel: "Folder 2",
+    folderLabelInputPlaceholder: "Ustaw etykiete",
+    scanButtonLabel: "Skanuj"
 } as const;
 
 const langs = {
