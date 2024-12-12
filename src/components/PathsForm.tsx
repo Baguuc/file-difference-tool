@@ -21,6 +21,8 @@ function PathsForm(props: PathsFormProps) {
     const [folder2Files, setFolder2Files] = useState([] as FolderFiles);
 
     function scan() {
+        props.setFileListData([]);
+
         invoke("scan_paths", {
             path1: folder1Files,
             path2: folder2Files

@@ -13,7 +13,7 @@ type PathInputProps = {
 
 function PathInput(props: PathInputProps) {
     const [files, setFiles] = useState(null as PathFiles | null);
-    const [chosen, setChosen] = useState(!!files);
+    const [chosen, setChosen] = useState(false);
     const [label, setLabel] = useState(getCurrLang().pathInputBeforeChosenLabel);
 
     useEffect(() => {
@@ -24,13 +24,10 @@ function PathInput(props: PathInputProps) {
     }, []);
 
     useEffect(() => {
-        if(chosen) {
+        if(!!files) {
+            setChosen(true);
             setLabel(`${getCurrLang().pathInputAfterChosenLabel} (${files?.length})`);
         }
-    }, [chosen]);
-
-    useEffect(() => {
-        setChosen(!!files);
 
         if(props.onInput && files) {
             props.onInput(files);
