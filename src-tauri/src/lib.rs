@@ -2,7 +2,34 @@ use std::{collections::HashMap, fs, path::Path};
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize)]
+fn bubblesort<T, R>(v: &mut [T], transform: fn(item: &T) -> R)
+where 
+    T: Clone,
+    R: PartialOrd + Ord
+{
+    let n = v.len();
+    for i in 0..(n - 1) {
+        let mut swapped = false;
+
+        for j in 0..(n - i - 1) {
+            let jv = v[j].clone();
+            let j1v = v[j + 1].clone();
+
+            if transform(&jv) > transform(&j1v) {
+                v[j] = j1v;
+                v[j + 1] = jv;
+
+                swapped = true;
+            }
+        }
+
+        if !swapped {
+            break;
+        }
+    }
+}
+
+#[derive(Serialize, Deserialize, Clone)]
 struct FileListItem {
     filename: String,
     // "1" | "2" | "both"
@@ -45,10 +72,8 @@ fn merge_by_name(path1: Vec<File>, path2: Vec<File>) -> MergedByName {
     return merged;
 }
 
-#[tauri::command]
-fn scan_paths(path1: Vec<File>, path2: Vec<File>) -> FileListData {
-    let merged_by_name = merge_by_name(path1, path2);
-    let as_file_list = merged_by_name.iter()
+fn sort_by_name(merged_by_name: MergedByName) -> FileListData {
+    let mut as_file_list = merged_by_name.iter()
         .map(|(_, item)| {
             let item = FileListItem {
                 filename: item.filename.clone(),
@@ -58,8 +83,17 @@ fn scan_paths(path1: Vec<File>, path2: Vec<File>) -> FileListData {
             return item;
         })
         .collect::<FileListData>();
-    
+    bubblesort::<FileListItem, String>(as_file_list.as_mut_slice(), |item| item.filename.clone());
+
     return as_file_list;
+}
+
+#[tauri::command]
+fn scan_paths(path1: Vec<File>, path2: Vec<File>) -> FileListData {
+    let merged_by_name = merge_by_name(path1, path2);
+    let sorted = sort_by_name(merged_by_name);
+    
+    return sorted;
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
