@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import FileList, { FileListData } from "./components/FileList";
-import PathsForm, { PathFiles } from "./components/PathsForm";
+import PathsForm from "./components/PathsForm";
 import LangChooser from "./components/LangChooser";
 
 function App() {

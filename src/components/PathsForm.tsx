@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getCurrLang } from "../consts/lang";
 import PathInput from "./PathInput";
 import { setFolder1Label, setFolder2Label } from "../consts/folderLabel";
